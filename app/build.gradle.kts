@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId = "com.github.huymaster.materialweather"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -23,6 +23,9 @@ android {
 
     buildTypes {
         release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles("proguard-rules.pro")
             optimization {
                 enable = false
             }
