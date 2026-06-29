@@ -7,9 +7,7 @@ plugins {
 android {
     namespace = "com.github.huymaster.materialweather"
     compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
+        version = release(37)
     }
 
     defaultConfig {
@@ -63,8 +61,6 @@ dependencies {
     implementation(libs.koin.compose.viewmodel)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.material.kolor)
-    implementation(libs.coil.compose)
-    implementation(libs.coil.network.ktor)
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.okhttp)
     implementation(libs.ktor.client.content.negotiation)
