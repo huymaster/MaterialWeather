@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MaterialWeather</string>
+
+    <string name="theme.dynamic.system">System</string>
+    <string name="theme.dynamic.light">Light</string>
+    <string name="theme.dynamic.dark">Dark</string>
+    <string name="theme.custom.system">System (Custom)</string>
+    <string name="theme.custom.light">Light (Custom)</string>
+    <string name="theme.custom.dark">Dark (Custom)</string>
 </resources>

@@ -2,7 +2,6 @@ package com.github.huymaster.materialweather
 
 import android.app.Application
 import com.github.huymaster.materialweather.di.ApplicationKoinProvider
-import com.squareup.leakcanary.core.BuildConfig
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -20,7 +19,7 @@ class MainApplication : Application() {
 
     private fun setupKoin() {
         startKoin {
-            androidLogger(if (BuildConfig.DEBUG) Level.DEBUG else Level.NONE)
+            androidLogger(if (BuildConfig.DEBUG) Level.DEBUG else Level.WARNING)
             androidContext(this@MainApplication)
             modules(ApplicationKoinProvider.getModules())
         }

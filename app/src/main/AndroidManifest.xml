@@ -10,11 +10,14 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/Theme.MaterialWeather">
+            android:usesCleartextTraffic="false"
+            android:enableOnBackInvokedCallback="true"
+            android:name=".MainApplication"
+            android:theme="@style/Theme.MaterialWeather"
+            tools:targetApi="33">
         <activity
-                android:name=".MainActivity"
+                android:name=".feature.entry.presentation.EntryActivity"
                 android:exported="true"
-                android:label="@string/app_name"
                 android:theme="@style/Theme.MaterialWeather"
                 android:windowSoftInputMode="adjustResize">
             <intent-filter>
