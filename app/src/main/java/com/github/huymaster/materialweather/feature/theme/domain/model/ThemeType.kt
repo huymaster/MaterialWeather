@@ -1,5 +1,6 @@
 package com.github.huymaster.materialweather.feature.theme.domain.model
 
+import android.util.Log
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -46,7 +47,7 @@ sealed interface ThemeType {
             element<Int>(KEY_COLOR, isOptional = true)
         }
 
-        override fun serialize(encoder: Encoder, value: ThemeType) {
+        override fun serialize(encoder: Encoder, value: ThemeType) = runCatching {
             val composite = encoder.beginStructure(descriptor)
             val serialKey = when (value) {
                 is Dynamic.System -> KEY_SYSTEM
@@ -60,9 +61,11 @@ sealed interface ThemeType {
             if (value is Custom)
                 composite.encodeIntElement(descriptor, INDEX_COLOR, value.colorArgb)
             composite.endStructure(descriptor)
-        }
+        }.onFailure {
+            Log.w(ThemeTypeSerializer::class.simpleName, "Failed to serialize theme", it)
+        }.getOrDefault(Unit)
 
-        override fun deserialize(decoder: Decoder): ThemeType {
+        override fun deserialize(decoder: Decoder): ThemeType = runCatching {
             val composite = decoder.beginStructure(descriptor)
             var type: String? = null
             var color: Int? = null
@@ -86,6 +89,8 @@ sealed interface ThemeType {
                 KEY_CUSTOM_DARK -> Custom.Dark(color ?: 0)
                 else -> Dynamic.System
             }
-        }
+        }.onFailure {
+            Log.w(ThemeTypeSerializer::class.simpleName, "Failed to deserialize theme", it)
+        }.getOrDefault(Dynamic.System)
     }
 }
