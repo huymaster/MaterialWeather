@@ -3,6 +3,7 @@ package com.github.huymaster.materialweather.core
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
@@ -55,7 +56,7 @@ abstract class BaseActivity(
 
         MaterialWeatherTheme(theme) {
             Surface(Modifier.fillMaxSize()) {
-                Content(adaptiveInfo)
+                Box { Content(adaptiveInfo) }
             }
         }
     }
