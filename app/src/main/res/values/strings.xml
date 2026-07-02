@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">MaterialWeather</string>
+    <string name="app_name">Material Weather</string>
+
+    <string name="generic.loading">Loading…</string>
 
     <string name="theme.dynamic.system">System</string>
     <string name="theme.dynamic.light">Light</string>

@@ -2,6 +2,7 @@ package com.github.huymaster.materialweather
 
 import android.app.Application
 import com.github.huymaster.materialweather.di.ApplicationKoinProvider
+import com.google.android.material.color.DynamicColors
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -14,6 +15,7 @@ class MainApplication : Application() {
     }
 
     private fun initialize() {
+        DynamicColors.applyToActivitiesIfAvailable(this)
         setupKoin()
     }
 
