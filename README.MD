@@ -10,14 +10,14 @@ applications.
 
 ## 2. Problem & Solution Argumentation
 
-- The Argument (Pain Points): Traditional weather applications are rigidly tied to a single data
+- **The Argument (Pain Points)**: Traditional weather applications are rigidly tied to a single data
   provider (API) and a static User Interface (UI). When an API's pricing model changes, services
   deprecate, or users need to integrate a local IoT weather station, these applications become
   obsolete.
-- The Evidence & Solution: MaterialWeather solves this by completely decoupling three core
+- **The Evidence & Solution**: MaterialWeather solves this by completely decoupling three core
   components: the Data Provider, the Parser, and the UI. Users act as "system configurators,"
   defining behaviors using JSON.
-- Trade-off: This approach offers absolute flexibility; however, it requires users to understand
+- **Trade-off**: This approach offers absolute flexibility; however, it requires users to understand
   external API documentation and update configurations if the data structure changes.
 
 ## 3. Technology Stack & Technical Standards
@@ -41,27 +41,31 @@ seamlessly: `[Provider Node] → [JSON Parser Engine] → [Dynamic UI Engine]`.
 
 Key design patterns implemented include:
 
-- Strategy Pattern: Utilized at the Provider Node layer. It allows seamless switching between
+- **Strategy Pattern**: Utilized at the Provider Node layer. It allows seamless switching between
   different data retrieval strategies (e.g., OpenWeatherMap Strategy vs. Local IoT Station Strategy)
   via a common interface without breaking the underlying architecture.
-- Factory Method / Builder Pattern: The Dynamic UI Engine relies on a WidgetFactory. When reading
+- **Factory Method** / Builder Pattern: The Dynamic UI Engine relies on a WidgetFactory. When
+  reading
   the UI structure from JSON (e.g., `{"type": "Text", "value": "..."}`), the Factory dynamically
   constructs the corresponding Jetpack Compose components (such as `Box`, `Row`, `Column`, `Text`).
-- Observer Pattern (via Flow): Extracted data is pushed into a `StateFlow`. The UI Engine acts as an
+- **Observer Pattern (via Flow)**: Extracted data is pushed into a `StateFlow`. The UI Engine acts
+  as an
   Observer, automatically recomposing the interface whenever new data arrives or the cache is
   updated.
-- Repository Pattern: Ensures a complete separation between the data fetching layer (Ktor/Room) and
+- **Repository Pattern**: Ensures a complete separation between the data fetching layer (Ktor/Room)
+  and
   the business logic layer, heavily enforcing the Dependency Inversion Principle.
 
 ## 5. Operational Flow (How It Works)
 
-1. Provider Node Configuration: Users define a data provider node using a configuration structure
+1. **Provider Node Configuration**: Users define a data provider node using a configuration
+   structure
    that includes the URI, Headers, Parameter Holders, and the HTTP Method. The Ktor
    network core executes the request and retrieves the raw JSON string.
-2. Parser Engine: Instead of relying on static data classes, the system utilizes JSONPath to
+2. **Parser Engine**: Instead of relying on static data classes, the system utilizes JSONPath to
    dynamically traverse the returned JSON tree. It accurately extracts necessary values (e.g.,
    temperature, humidity) based on user-defined rules.
-3. Dynamic UI Binding (The Backbone): The UI is defined via a structured JSON tree. A built-in
+3. **Dynamic UI Binding (The Backbone)**: The UI is defined via a structured JSON tree. A built-in
    Mapper traverses this tree; for instance, encountering a "Box" node dynamically generates a
    Compose `Box`. Text values support dynamic binding (e.g., `{{current.temp}}°C`), allowing the
    engine
