@@ -22,9 +22,7 @@ applications.
 
 ## 3. Technology Stack & Technical Standards
 
-- Language:
-  [![Kotlin](https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white)]((https://kotlinlang.org/))
-
+- Language: [Kotlin](https://kotlinlang.org/)
 - UI Framework: [Jetpack Compose](https://developer.android.com/compose)
   ([Adaptive UI](https://developer.android.com/develop/adaptive-apps/guides/get-started-with-adaptive-apps) & [Material 3](https://m3.material.io/))
 - Dependency Injection: [Koin](https://insert-koin.io/)
