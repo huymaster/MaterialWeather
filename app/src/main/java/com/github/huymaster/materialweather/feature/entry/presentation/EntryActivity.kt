@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
@@ -30,6 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.huymaster.materialweather.R
 import com.github.huymaster.materialweather.core.BaseActivity
 import com.github.huymaster.materialweather.feature.entry.domain.model.EntryNavigationRoute
+import com.github.huymaster.materialweather.feature.permission.presentation.PermissionActivity
 import org.koin.androidx.compose.koinViewModel
 
 class EntryActivity : BaseActivity() {
@@ -49,13 +49,13 @@ class EntryActivity : BaseActivity() {
             if (transitionState.isIdle && transitionState.currentState == transitionState.targetState) {
                 when (transitionState.currentState) {
                     EntryNavigationRoute.Initial -> Unit
-                    EntryNavigationRoute.MoveToInit -> TODO("INIT")
+                    EntryNavigationRoute.MoveToInit -> navigateTo(PermissionActivity::class.java)
                     EntryNavigationRoute.MoveToMain -> TODO("MAIN")
                 }
             }
         }
 
-        transition.Crossfade(animationSpec = tween(350, 100)) {
+        transition.Crossfade(animationSpec = tween(delayMillis = 400)) {
             when (it) {
                 EntryNavigationRoute.Initial -> LoadingScreen()
                 else -> Box(Modifier.fillMaxSize())
@@ -80,18 +80,16 @@ private fun LoadingScreen(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Card {
-            Column(
-                modifier = Modifier.padding(36.dp, 24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                LoadingIndicator()
-                Spacer(Modifier.size(4.dp))
-                Text(
-                    text = stringResource(R.string.generic_loading),
-                    style = MaterialTheme.typography.bodySmall
-                )
-            }
+        Column(
+            modifier = Modifier.padding(36.dp, 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            LoadingIndicator()
+            Spacer(Modifier.size(4.dp))
+            Text(
+                text = stringResource(R.string.generic_loading),
+                style = MaterialTheme.typography.bodySmall
+            )
         }
     }
 }

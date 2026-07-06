@@ -31,7 +31,7 @@ class AppSettingsDataSourceImpl(
         }
 
     override suspend fun getInitialized(): Boolean =
-        source.data.map { it[KEY_INITIALIZED] }.first() ?: true
+        source.data.map { it[KEY_INITIALIZED] }.first() ?: false
 
     override suspend fun setInitialized(isInitialied: Boolean) {
         source.edit { it[KEY_INITIALIZED] = isInitialied }
