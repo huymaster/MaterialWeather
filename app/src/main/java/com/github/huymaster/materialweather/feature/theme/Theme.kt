@@ -46,7 +46,7 @@ private fun DynamicTheme(
             ThemeType.Dynamic.Dark -> true
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && theme is ThemeType.Dynamic.System) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (isDark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         } else {
             if (isDark) defaultDark else defaultLight

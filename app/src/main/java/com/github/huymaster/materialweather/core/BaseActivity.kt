@@ -17,8 +17,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.enableSavedStateHandles
 import com.github.huymaster.materialweather.feature.theme.MaterialWeatherTheme
 import com.github.huymaster.materialweather.feature.theme.domain.model.ThemeType
-import com.github.huymaster.materialweather.feature.theme.domain.model.ThemeUiState
-import com.github.huymaster.materialweather.feature.theme.presentation.ThemeViewModel
+import com.github.huymaster.materialweather.feature.theme.presentation.state.ThemeUiState
+import com.github.huymaster.materialweather.feature.theme.presentation.viewmodel.ThemeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 
