@@ -26,6 +26,7 @@
             android:enableOnBackInvokedCallback="true"
             android:name=".MainApplication"
             android:theme="@style/Theme.MaterialWeather"
+            android:localeConfig="@xml/locale_config"
             tools:targetApi="33">
         <activity
                 android:name=".feature.entry.presentation.EntryActivity"
