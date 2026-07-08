@@ -1,4 +1,4 @@
-package com.github.huymaster.materialweather.feature.entry.presentation
+package com.github.huymaster.materialweather.feature.entry.ui
 
 import android.content.Intent
 import android.os.Build
@@ -29,9 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.huymaster.materialweather.R
 import com.github.huymaster.materialweather.core.BaseActivity
-import com.github.huymaster.materialweather.feature.entry.presentation.state.EntryNavigationState
-import com.github.huymaster.materialweather.feature.entry.presentation.viewmodel.EntryViewModel
-import com.github.huymaster.materialweather.feature.permission.presentation.PermissionActivity
+import com.github.huymaster.materialweather.feature.entry.ui.state.EntryNavigationState
+import com.github.huymaster.materialweather.feature.entry.ui.viewmodel.EntryViewModel
+import com.github.huymaster.materialweather.feature.permission.ui.PermissionActivity
 import org.koin.androidx.compose.koinViewModel
 
 class EntryActivity : BaseActivity() {

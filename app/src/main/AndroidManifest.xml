@@ -29,7 +29,7 @@
             android:localeConfig="@xml/locale_config"
             tools:targetApi="33">
         <activity
-                android:name=".feature.entry.presentation.EntryActivity"
+                android:name=".feature.entry.ui.EntryActivity"
                 android:exported="true"
                 android:launchMode="singleTask"
                 android:theme="@style/Theme.MaterialWeather"
@@ -42,7 +42,7 @@
         </activity>
 
         <activity
-                android:name=".feature.permission.presentation.PermissionActivity"
+                android:name=".feature.permission.ui.PermissionActivity"
                 android:exported="false" />
     </application>
 </manifest>

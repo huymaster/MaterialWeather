@@ -1,4 +1,4 @@
-package com.github.huymaster.materialweather.feature.permission.presentation
+package com.github.huymaster.materialweather.feature.permission.ui
 
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.runtime.Composable

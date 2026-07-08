@@ -1,4 +1,4 @@
-package com.github.huymaster.materialweather.feature.entry.presentation.state
+package com.github.huymaster.materialweather.feature.entry.ui.state
 
 sealed interface EntryNavigationState {
     data object Initial : EntryNavigationState

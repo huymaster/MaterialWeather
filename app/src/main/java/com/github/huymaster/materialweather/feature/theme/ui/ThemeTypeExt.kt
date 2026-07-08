@@ -1,4 +1,4 @@
-package com.github.huymaster.materialweather.feature.theme.presentation
+package com.github.huymaster.materialweather.feature.theme.ui
 
 import androidx.annotation.StringRes
 import com.github.huymaster.materialweather.R

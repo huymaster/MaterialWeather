@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.github.huymaster.materialweather.feature.settings.domain.AppSettingsDataSource
+import com.github.huymaster.materialweather.feature.settings.domain.AppSettingsRepository
 import com.github.huymaster.materialweather.feature.theme.domain.model.ThemeType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -14,10 +14,10 @@ import kotlinx.serialization.json.Json
 
 private val Context.appSettings by preferencesDataStore("app_settings")
 
-class AppSettingsDataSourceImpl(
+class AppSettingsRepositoryImpl(
     context: Context,
     private val json: Json
-) : AppSettingsDataSource {
+) : AppSettingsRepository {
     private val source = context.appSettings
     private val data = source.data
 

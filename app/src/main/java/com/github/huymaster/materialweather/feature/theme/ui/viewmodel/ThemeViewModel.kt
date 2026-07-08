@@ -1,11 +1,11 @@
-package com.github.huymaster.materialweather.feature.theme.presentation.viewmodel
+package com.github.huymaster.materialweather.feature.theme.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.huymaster.materialweather.feature.theme.domain.model.ThemeType
 import com.github.huymaster.materialweather.feature.theme.domain.usecase.ObserveThemeUseCase
 import com.github.huymaster.materialweather.feature.theme.domain.usecase.SetThemeUseCase
-import com.github.huymaster.materialweather.feature.theme.presentation.state.ThemeUiState
+import com.github.huymaster.materialweather.feature.theme.ui.state.ThemeUiState
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map

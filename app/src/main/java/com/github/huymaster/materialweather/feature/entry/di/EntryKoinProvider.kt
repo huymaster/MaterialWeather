@@ -4,7 +4,7 @@ import com.github.huymaster.materialweather.di.KoinProvider
 import com.github.huymaster.materialweather.feature.entry.domain.usecase.GetInitializedUseCase
 import com.github.huymaster.materialweather.feature.entry.domain.usecase.ObserveInitializedUseCase
 import com.github.huymaster.materialweather.feature.entry.domain.usecase.SetInitializedUseCase
-import com.github.huymaster.materialweather.feature.entry.presentation.viewmodel.EntryViewModel
+import com.github.huymaster.materialweather.feature.entry.ui.viewmodel.EntryViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf

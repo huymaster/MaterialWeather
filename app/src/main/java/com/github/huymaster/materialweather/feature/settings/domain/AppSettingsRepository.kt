@@ -3,7 +3,7 @@ package com.github.huymaster.materialweather.feature.settings.domain
 import com.github.huymaster.materialweather.feature.theme.domain.model.ThemeType
 import kotlinx.coroutines.flow.Flow
 
-interface AppSettingsDataSource {
+interface AppSettingsRepository {
     val isInitialized: Flow<Boolean>
     val theme: Flow<ThemeType>
 

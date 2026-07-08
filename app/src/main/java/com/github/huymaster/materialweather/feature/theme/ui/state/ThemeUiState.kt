@@ -1,4 +1,4 @@
-package com.github.huymaster.materialweather.feature.theme.presentation.state
+package com.github.huymaster.materialweather.feature.theme.ui.state
 
 import com.github.huymaster.materialweather.feature.theme.domain.model.ThemeType
 

@@ -4,7 +4,7 @@ import com.github.huymaster.materialweather.di.KoinProvider
 import com.github.huymaster.materialweather.feature.theme.domain.usecase.GetThemeUseCase
 import com.github.huymaster.materialweather.feature.theme.domain.usecase.ObserveThemeUseCase
 import com.github.huymaster.materialweather.feature.theme.domain.usecase.SetThemeUseCase
-import com.github.huymaster.materialweather.feature.theme.presentation.viewmodel.ThemeViewModel
+import com.github.huymaster.materialweather.feature.theme.ui.viewmodel.ThemeViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf
