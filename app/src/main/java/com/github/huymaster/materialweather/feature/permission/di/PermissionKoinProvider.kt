@@ -3,6 +3,7 @@ package com.github.huymaster.materialweather.feature.permission.di
 import com.github.huymaster.materialweather.di.KoinProvider
 import com.github.huymaster.materialweather.feature.permission.data.PermissionRepositoryImpl
 import com.github.huymaster.materialweather.feature.permission.domain.PermissionRepository
+import com.github.huymaster.materialweather.feature.permission.ui.PermissionStrategyFactory
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -12,8 +13,12 @@ object PermissionKoinProvider : KoinProvider {
     private val repositoryModule = module {
         singleOf(::PermissionRepositoryImpl) { bind<PermissionRepository>() }
     }
+    private val factoryModule = module {
+        singleOf(::PermissionStrategyFactory)
+    }
 
     override fun getModules(): List<Module> = listOf(
-        repositoryModule
+        repositoryModule,
+        factoryModule
     )
 }

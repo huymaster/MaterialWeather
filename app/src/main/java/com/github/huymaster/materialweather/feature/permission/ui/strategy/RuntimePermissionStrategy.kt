@@ -1,11 +1,11 @@
 package com.github.huymaster.materialweather.feature.permission.ui.strategy
 
-import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.github.huymaster.materialweather.core.utils.findActivity
 import com.github.huymaster.materialweather.feature.permission.domain.PermissionRepository
 import com.github.huymaster.materialweather.feature.permission.domain.model.PermissionState
 import com.github.huymaster.materialweather.feature.permission.ui.PermissionStrategy
@@ -39,11 +39,10 @@ class RuntimePermissionStrategy(
             return
         }
 
-        val showRationale = if (context is Activity) {
-            ActivityCompat.shouldShowRequestPermissionRationale(context, permission)
-        } else {
-            false
-        }
+        val activity = context.findActivity()
+        val showRationale = activity?.let {
+            ActivityCompat.shouldShowRequestPermissionRationale(it, permission)
+        } ?: false
 
         val wasRequested = permissionRepository.isRequested(permission)
 
