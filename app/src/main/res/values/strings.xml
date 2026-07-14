@@ -9,4 +9,13 @@
     <string name="theme.custom.system">System (Custom)</string>
     <string name="theme.custom.light">Light (Custom)</string>
     <string name="theme.custom.dark">Dark (Custom)</string>
+
+    <string name="permission.internet.label">Internet access</string>
+    <string name="permission.internet.desc">Fetch real-time weather data from the internet.</string>
+    <string name="permission.location.label">Location</string>
+    <string name="permission.location.desc">Show weather for your current city automatically.</string>
+    <string name="permission.location.exact.label">Precise location</string>
+    <string name="permission.location.exact.desc">Provide local forecasts, severe weather alerts, and radar for your exact position.</string>
+    <string name="permission.notification.label">Notifications</string>
+    <string name="permission.notification.desc">Receive daily weather summaries, rain warnings, and urgent severe weather alerts.</string>
 </resources>

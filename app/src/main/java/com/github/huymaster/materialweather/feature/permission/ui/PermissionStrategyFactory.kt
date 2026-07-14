@@ -12,11 +12,10 @@ class PermissionStrategyFactory(
     fun create(permissionType: PermissionType): PermissionStrategy<*> {
         return when (permissionType) {
             is PermissionType.Runtime -> {
-                if (Build.VERSION.SDK_INT in permissionType.supportedSdk) {
+                if (Build.VERSION.SDK_INT in permissionType.supportedSdk)
                     RuntimePermissionStrategy(permissionType.permission, permissionRepository)
-                } else {
+                else
                     AlwaysGrantedPermissionStrategy()
-                }
             }
         }
     }

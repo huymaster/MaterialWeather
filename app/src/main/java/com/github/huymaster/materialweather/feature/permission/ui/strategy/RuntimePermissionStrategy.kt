@@ -2,12 +2,12 @@ package com.github.huymaster.materialweather.feature.permission.ui.strategy
 
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.github.huymaster.materialweather.core.utils.findActivity
 import com.github.huymaster.materialweather.feature.permission.domain.PermissionRepository
 import com.github.huymaster.materialweather.feature.permission.domain.model.PermissionState
+import com.github.huymaster.materialweather.feature.permission.ui.PermissionRequestDelegate
 import com.github.huymaster.materialweather.feature.permission.ui.PermissionStrategy
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,10 +22,10 @@ class RuntimePermissionStrategy(
 
     override suspend fun requestPermission(
         context: Context,
-        launcher: ActivityResultLauncher<String>?
+        delegate: PermissionRequestDelegate
     ) {
         permissionRepository.setRequested(permission)
-        launcher?.launch(permission)
+        delegate.requestRuntimePermission(permission)
     }
 
     override suspend fun checkPermission(context: Context) {

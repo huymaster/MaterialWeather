@@ -8,27 +8,16 @@ import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.rememberTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.LoadingIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.github.huymaster.materialweather.R
 import com.github.huymaster.materialweather.core.BaseActivity
+import com.github.huymaster.materialweather.feature.entry.ui.component.LoadingScreen
 import com.github.huymaster.materialweather.feature.entry.ui.state.EntryNavigationState
 import com.github.huymaster.materialweather.feature.entry.ui.viewmodel.EntryViewModel
 import com.github.huymaster.materialweather.feature.permission.ui.PermissionActivity
@@ -66,9 +55,7 @@ class EntryActivity : BaseActivity() {
     }
 
     private fun navigateTo(clazz: Class<out BaseActivity>) {
-        val intent = Intent(this, clazz).apply {
-            flags = 0 or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
+        val intent = Intent(this, clazz)
         startActivity(intent)
         finish()
         applyNoAnimationTransition()
@@ -82,27 +69,4 @@ class EntryActivity : BaseActivity() {
             @Suppress("DEPRECATION")
             overridePendingTransition(0, 0)
         }
-}
-
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
-@Composable
-private fun LoadingScreen(
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            modifier = Modifier.padding(36.dp, 24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            LoadingIndicator()
-            Spacer(Modifier.size(4.dp))
-            Text(
-                text = stringResource(R.string.generic_loading),
-                style = MaterialTheme.typography.bodySmall
-            )
-        }
-    }
 }

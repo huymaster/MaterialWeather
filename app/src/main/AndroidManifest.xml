@@ -31,7 +31,7 @@
         <activity
                 android:name=".feature.entry.ui.EntryActivity"
                 android:exported="true"
-                android:launchMode="singleTask"
+                android:launchMode="singleTop"
                 android:theme="@style/Theme.MaterialWeather"
                 android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
