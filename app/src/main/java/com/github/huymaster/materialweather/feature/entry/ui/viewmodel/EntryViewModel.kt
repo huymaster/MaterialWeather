@@ -2,8 +2,8 @@ package com.github.huymaster.materialweather.feature.entry.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.huymaster.materialweather.feature.entry.domain.usecase.GetInitializedUseCase
 import com.github.huymaster.materialweather.feature.entry.ui.state.EntryNavigationState
+import com.github.huymaster.materialweather.feature.settings.domain.usecase.GetInitializedUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

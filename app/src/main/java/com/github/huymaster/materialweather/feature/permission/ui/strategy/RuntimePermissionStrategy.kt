@@ -25,7 +25,11 @@ class RuntimePermissionStrategy(
         delegate: PermissionRequestDelegate
     ) {
         permissionRepository.setRequested(permission)
-        delegate.requestRuntimePermission(permission)
+        when (state.value) {
+            PermissionState.GRANTED -> Unit
+            PermissionState.DENIED -> delegate.requestRuntimePermission(permission)
+            PermissionState.PERMANENTLY_DENIED -> delegate.openAppDetailsSettings(context.packageName)
+        }
     }
 
     override suspend fun checkPermission(context: Context) {

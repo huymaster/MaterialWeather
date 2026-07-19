@@ -17,7 +17,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.huymaster.materialweather.core.BaseActivity
-import com.github.huymaster.materialweather.feature.entry.ui.component.LoadingScreen
 import com.github.huymaster.materialweather.feature.entry.ui.state.EntryNavigationState
 import com.github.huymaster.materialweather.feature.entry.ui.viewmodel.EntryViewModel
 import com.github.huymaster.materialweather.feature.permission.ui.PermissionActivity

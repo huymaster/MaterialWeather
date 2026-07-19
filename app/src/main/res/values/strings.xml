@@ -10,6 +10,14 @@
     <string name="theme.custom.light">Light (Custom)</string>
     <string name="theme.custom.dark">Dark (Custom)</string>
 
+    <string name="permission.title">Grant permissions</string>
+    <string name="permission.desc">App requires certain permissions to function optimally.</string>
+    <string name="permission.required">Required</string>
+    <string name="permission.optional">Optional</string>
+    <string name="permission.missing.dependencies">Required permissions: %s</string>
+    <string name="permission.button.continue">Continue</string>
+    <string name="permission.button.grant">Grant</string>
+    <string name="permission.button.settings">Settings</string>
     <string name="permission.internet.label">Internet access</string>
     <string name="permission.internet.desc">Fetch real-time weather data from the internet.</string>
     <string name="permission.location.label">Location</string>

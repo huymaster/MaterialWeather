@@ -1,4 +1,4 @@
-package com.github.huymaster.materialweather.feature.entry.ui.component
+package com.github.huymaster.materialweather.feature.entry.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

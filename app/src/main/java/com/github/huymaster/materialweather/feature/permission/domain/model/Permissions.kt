@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.os.Build
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddLocationAlt
-import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Notifications
 import com.github.huymaster.materialweather.R
@@ -16,7 +15,6 @@ object Permissions {
         info = PermissionInfo(
             labelId = R.string.permission_internet_label,
             descriptionId = R.string.permission_internet_desc,
-            icon = PermissionIcon.Vector(Icons.Default.Link)
         )
     )
 
@@ -43,8 +41,8 @@ object Permissions {
     val notification = PermissionType.Runtime(
         permission = Manifest.permission.POST_NOTIFICATIONS,
         info = PermissionInfo(
-            labelId = R.string.permission_location_label,
-            descriptionId = R.string.permission_location_desc,
+            labelId = R.string.permission_notification_label,
+            descriptionId = R.string.permission_notification_desc,
             icon = PermissionIcon.Vector(Icons.Default.Notifications)
         ),
         minSdk = Build.VERSION_CODES.TIRAMISU

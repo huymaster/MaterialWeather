@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.huymaster.materialweather.core.BaseActivity
-import com.github.huymaster.materialweather.feature.permission.ui.component.PermissionScreen
 import com.github.huymaster.materialweather.feature.permission.ui.viewmodel.PermissionViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -35,8 +34,16 @@ class PermissionActivity : BaseActivity() {
                     .fillMaxSize(),
                 adaptiveInfo = adaptiveInfo,
                 requiredPermissions = requiredControllers,
-                optionalPermissions = optionalControllers
+                optionalPermissions = optionalControllers,
+                onComplete = {
+                    viewModel.markInitialized()
+                    moveToMain()
+                }
             )
         }
+    }
+
+    private fun moveToMain() {
+        TODO()
     }
 }
