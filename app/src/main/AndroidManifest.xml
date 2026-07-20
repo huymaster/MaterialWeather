@@ -44,5 +44,9 @@
         <activity
                 android:name=".feature.permission.ui.PermissionActivity"
                 android:exported="false" />
+
+        <activity
+                android:name=".feature.main.ui.MainActivity"
+                android:exported="false" />
     </application>
 </manifest>

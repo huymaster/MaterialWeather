@@ -1,7 +1,5 @@
 package com.github.huymaster.materialweather.feature.entry.ui
 
-import android.content.Intent
-import android.os.Build
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.MutableTransitionState
@@ -52,20 +50,4 @@ class EntryActivity : BaseActivity() {
             }
         }
     }
-
-    private fun navigateTo(clazz: Class<out BaseActivity>) {
-        val intent = Intent(this, clazz)
-        startActivity(intent)
-        finish()
-        applyNoAnimationTransition()
-    }
-
-    private fun applyNoAnimationTransition() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0)
-            overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, 0, 0)
-        } else {
-            @Suppress("DEPRECATION")
-            overridePendingTransition(0, 0)
-        }
 }

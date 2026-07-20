@@ -1,5 +1,7 @@
 package com.github.huymaster.materialweather.core
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -47,6 +49,22 @@ abstract class BaseActivity(
             }
         }
     }
+
+    protected fun navigateTo(clazz: Class<out BaseActivity>) {
+        val intent = Intent(this, clazz)
+        startActivity(intent)
+        finish()
+        applyNoAnimationTransition()
+    }
+
+    private fun applyNoAnimationTransition() =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0)
+            overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, 0, 0)
+        } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(0, 0)
+        }
 }
 
 @Composable
