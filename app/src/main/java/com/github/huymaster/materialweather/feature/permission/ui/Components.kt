@@ -25,6 +25,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Settings
@@ -102,14 +103,22 @@ fun PermissionScreen(
             contentAlignment = Alignment.CenterEnd
         ) {
             Button(
-                modifier = Modifier.align(Alignment.CenterEnd),
                 enabled = isAllRequiredGranted,
                 onClick = onComplete,
             ) {
-                Text(
-                    text = stringResource(R.string.permission_button_continue),
-                    style = MaterialTheme.typography.labelLarge
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.permission_button_continue),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                    Icon(
+                        Icons.AutoMirrored.Filled.ArrowForward,
+                        contentDescription = null
+                    )
+                }
             }
         }
     }
