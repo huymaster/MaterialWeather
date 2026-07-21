@@ -22,24 +22,26 @@ private val defaultDark = darkColorScheme()
 @Composable
 fun MaterialWeatherTheme(
     theme: ThemeType? = null,
+    isAmoled: Boolean = false,
     content: @Composable () -> Unit
 ) {
     when (theme) {
-        is ThemeType.Dynamic -> DynamicTheme(theme, content)
-        is ThemeType.Custom -> CustomTheme(theme, content)
-        else -> DynamicTheme(ThemeType.Dynamic.System, content)
+        is ThemeType.Dynamic -> DynamicTheme(theme, isAmoled, content)
+        is ThemeType.Custom -> CustomTheme(theme, isAmoled, content)
+        else -> DynamicTheme(ThemeType.Dynamic.System, isAmoled, content)
     }
 }
 
 @Composable
 private fun DynamicTheme(
     theme: ThemeType.Dynamic,
+    isAmoled: Boolean,
     content: @Composable () -> Unit
 ) {
     val context = LocalContext.current
     val isSystemInDarkTheme = isSystemInDarkTheme()
 
-    val scheme: ColorScheme = remember(theme, isSystemInDarkTheme) {
+    val baseScheme: ColorScheme = remember(theme, isSystemInDarkTheme) {
         val isDark = when (theme) {
             ThemeType.Dynamic.System -> isSystemInDarkTheme
             ThemeType.Dynamic.Light -> false
@@ -52,6 +54,11 @@ private fun DynamicTheme(
             if (isDark) defaultDark else defaultLight
         }
     }
+    val scheme = rememberDynamicColorScheme(
+        baseScheme.primary,
+        isSystemInDarkTheme,
+        isAmoled
+    )
 
     MaterialExpressiveTheme(
         colorScheme = scheme,
@@ -63,6 +70,7 @@ private fun DynamicTheme(
 @Composable
 private fun CustomTheme(
     theme: ThemeType.Custom,
+    isAmoled: Boolean,
     content: @Composable () -> Unit
 ) {
     val color = remember(theme) { theme.colorArgb }
@@ -72,7 +80,7 @@ private fun CustomTheme(
         is ThemeType.Custom.Dark -> true
     }
 
-    val scheme: ColorScheme = rememberDynamicColorScheme(Color(color), isDark)
+    val scheme: ColorScheme = rememberDynamicColorScheme(Color(color), isDark, isAmoled)
     MaterialExpressiveTheme(
         colorScheme = scheme,
         typography = MaterialTheme.typography,

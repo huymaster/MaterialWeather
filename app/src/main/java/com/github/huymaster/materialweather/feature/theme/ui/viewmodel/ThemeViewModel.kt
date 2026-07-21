@@ -2,6 +2,8 @@ package com.github.huymaster.materialweather.feature.theme.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.huymaster.materialweather.feature.settings.domain.usecase.ObserveAmoledUseCase
+import com.github.huymaster.materialweather.feature.settings.domain.usecase.SetAmoledUseCase
 import com.github.huymaster.materialweather.feature.theme.domain.model.ThemeType
 import com.github.huymaster.materialweather.feature.theme.domain.usecase.ObserveThemeUseCase
 import com.github.huymaster.materialweather.feature.theme.domain.usecase.SetThemeUseCase
@@ -13,8 +15,10 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class ThemeViewModel(
-    private val observeThemeUseCase: ObserveThemeUseCase,
-    private val setThemeUseCase: SetThemeUseCase
+    observeThemeUseCase: ObserveThemeUseCase,
+    observeAmoledUseCase: ObserveAmoledUseCase,
+    private val setThemeUseCase: SetThemeUseCase,
+    private val setAmoledUseCase: SetAmoledUseCase
 ) : ViewModel() {
 
     val themeUiState: StateFlow<ThemeUiState> = observeThemeUseCase(Unit)
@@ -25,7 +29,18 @@ class ThemeViewModel(
             initialValue = ThemeUiState.Loading
         )
 
+    val isAmoled: StateFlow<Boolean> = observeAmoledUseCase(Unit)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = false
+        )
+
     fun setTheme(theme: ThemeType) {
         viewModelScope.launch { setThemeUseCase(theme) }
+    }
+
+    fun setAmoled(isAmoled: Boolean) {
+        viewModelScope.launch { setAmoledUseCase(isAmoled) }
     }
 }

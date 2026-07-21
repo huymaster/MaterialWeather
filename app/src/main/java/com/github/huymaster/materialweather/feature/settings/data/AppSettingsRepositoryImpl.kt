@@ -24,6 +24,9 @@ class AppSettingsRepositoryImpl(
     override val isInitialized: Flow<Boolean> = data
         .map { it[KEY_INITIALIZED] ?: false }
 
+    override val isAmoled: Flow<Boolean> = data
+        .map { it[KEY_AMOLED] ?: false }
+
     override val theme: Flow<ThemeType> = data
         .map {
             val string = it[KEY_THEME] ?: return@map ThemeType.Dynamic.System
@@ -36,6 +39,14 @@ class AppSettingsRepositoryImpl(
     override suspend fun setInitialized(isInitialied: Boolean) {
         source.edit { it[KEY_INITIALIZED] = isInitialied }
     }
+
+    override suspend fun getAmoled(): Boolean =
+        source.data.map { it[KEY_AMOLED] }.first() ?: false
+    
+    override suspend fun setAmoled(isAmoled: Boolean) {
+        source.edit { it[KEY_AMOLED] = isAmoled }
+    }
+
 
     override suspend fun getTheme(): ThemeType =
         source.data.map {
@@ -52,6 +63,7 @@ class AppSettingsRepositoryImpl(
 
     private companion object {
         val KEY_INITIALIZED = booleanPreferencesKey("initialized")
+        val KEY_AMOLED = booleanPreferencesKey("amoled")
         val KEY_THEME = stringPreferencesKey("theme")
     }
 }

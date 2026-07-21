@@ -42,10 +42,11 @@ abstract class BaseActivity(
 
         setContent {
             val state by themeViewModel.themeUiState.collectAsStateWithLifecycle()
+            val isAmoled by themeViewModel.isAmoled.collectAsStateWithLifecycle()
 
             if (state is ThemeUiState.Success) {
                 val theme = (state as ThemeUiState.Success).theme
-                ContentScreen(theme, ::Content)
+                ContentScreen(theme, isAmoled, ::Content)
             }
         }
     }
@@ -70,11 +71,12 @@ abstract class BaseActivity(
 @Composable
 private fun ContentScreen(
     theme: ThemeType,
+    isAmoled: Boolean,
     content: @Composable (WindowAdaptiveInfo) -> Unit
 ) {
     val adaptiveInfo = currentWindowAdaptiveInfoV2()
 
-    MaterialWeatherTheme(theme) {
+    MaterialWeatherTheme(theme, isAmoled) {
         Surface(Modifier.fillMaxSize()) {
             Box { content(adaptiveInfo) }
         }
