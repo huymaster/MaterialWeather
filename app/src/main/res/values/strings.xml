@@ -3,6 +3,11 @@
 
     <string name="generic.loading">Loading…</string>
 
+    <string name="exception.infinity.loop">Detected cyclic dependency in execution graph</string>
+    <string name="exception.invalid.type">Expected %s, got %s</string>
+    <string name="exception.null.param">Required parameter %s is null</string>
+    <string name="exception.duplicate.connection">Duplicate connection %d</string>
+
     <string name="theme.dynamic.system">System</string>
     <string name="theme.dynamic.light">Light</string>
     <string name="theme.dynamic.dark">Dark</string>
