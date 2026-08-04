@@ -14,8 +14,8 @@ class NodeSorter {
     ): List<List<Node>> {
         val paramToNode = mutableMapOf<String, Node>()
         for (node in nodes) {
-            for (input in node.inputs) paramToNode[input.id] = node
-            for (output in node.outputs) paramToNode[output.id] = node
+            for (input in node.getInputs()) paramToNode[input.id] = node
+            for (output in node.getOutputs()) paramToNode[output.id] = node
         }
 
         val inDegree = mutableMapOf<String, Int>()

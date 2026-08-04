@@ -14,13 +14,19 @@ class NodeGraph(
 
     fun addNode(node: Node) {
         _nodes[node.id] = node
-        node.inputs.forEach { paramMap[it.id] = it }
-        node.outputs.forEach { paramMap[it.id] = it }
+
+        val inputs = node.getInputs()
+        val outputs = node.getOutputs()
+        inputs.forEach { paramMap[it.id] = it }
+        outputs.forEach { paramMap[it.id] = it }
     }
 
     fun removeNode(nodeId: String) {
         val node = _nodes.remove(nodeId) ?: return
-        val nodeParamIds = (node.inputs.map { it.id } + node.outputs.map { it.id }).toSet()
+        val inputs = node.getInputs()
+        val outputs = node.getOutputs()
+
+        val nodeParamIds = (inputs.map { it.id } + outputs.map { it.id }).toSet()
 
         _connections.removeIf { it.fromParamId in nodeParamIds || it.toParamId in nodeParamIds }
         nodeParamIds.forEach { id ->

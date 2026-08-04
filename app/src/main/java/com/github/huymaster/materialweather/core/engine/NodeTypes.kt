@@ -12,24 +12,28 @@ sealed class NodeParam<T : Any>(
         name: String,
         type: KClass<T>,
         val defaultValue: T? = null,
-        val isOptional: Boolean = defaultValue != null
-    ) : NodeParam<T>(name = name, type = type)
+        val isOptional: Boolean = defaultValue != null,
+        id: String = Uuid.random().toString()
+    ) : NodeParam<T>(id = id, name = name, type = type)
 
     class Output<T : Any>(
         name: String,
-        type: KClass<T>
-    ) : NodeParam<T>(name = name, type = type)
+        type: KClass<T>,
+        id: String = Uuid.random().toString()
+    ) : NodeParam<T>(id = id, name = name, type = type)
 
     companion object {
         inline fun <reified T : Any> input(
             name: String,
             defaultValue: T? = null,
-            isOptional: Boolean = defaultValue != null
-        ) = Input(name, T::class, defaultValue, isOptional)
+            isOptional: Boolean = defaultValue != null,
+            id: String = Uuid.random().toString()
+        ) = Input(name, T::class, defaultValue, isOptional, id)
 
         inline fun <reified T : Any> output(
-            name: String
-        ) = Output(name, T::class)
+            name: String,
+            id: String = Uuid.random().toString()
+        ) = Output(name, T::class, id)
     }
 }
 
@@ -61,6 +65,7 @@ enum class NodeStatus {
     IDLE,
     RUNNING,
     COMPLETED,
+    SKIPPED,
     FAILED
 }
 
