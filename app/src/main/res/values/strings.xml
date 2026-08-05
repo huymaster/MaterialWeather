@@ -5,8 +5,17 @@
 
     <string name="exception.infinity.loop">Detected cyclic dependency in execution graph</string>
     <string name="exception.invalid.type">Expected %s, got %s</string>
+    <string name="exception.invalid.factory">Invalid node factory for %s</string>
     <string name="exception.null.param">Required parameter %s not found</string>
     <string name="exception.duplicate.connection">Duplicate connection %d</string>
+    <string name="exception.missing.input">Missing required input of %s with id %s</string>
+    <string name="exception.flow.skipped">Flow %s was skipped</string>
+    <string name="exception.node.factory.registered.twice">Node factory %s registered twice</string>
+    <string name="exception.node.factory.not.found">Node factory %s not found</string>
+    <string name="exception.cannot.serialize.node">Cannot serialize node %s</string>
+    <string name="exception.cannot.deserialize">Cannot deserialize: %s</string>
+
+    <string name="node.exception.handler">Exception hanlder</string>
 
     <string name="theme.dynamic.system">System</string>
     <string name="theme.dynamic.light">Light</string>
