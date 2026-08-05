@@ -15,4 +15,5 @@ sealed class NodeException(
     class NodeFactoryRegisteredTwice(val types: Set<String>) : NodeException()
     class NodeFactoryNotFound(val type: String) : NodeException()
     class CannotSerializeNode(val nodeId: String) : NodeException()
+    class CannotDeserialize(val msg: String) : NodeException()
 }

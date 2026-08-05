@@ -12,6 +12,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.uuid.Uuid
 
 class NodeExecutionEngine(
     context: CoroutineContext = EmptyCoroutineContext,
@@ -27,7 +28,7 @@ class NodeExecutionEngine(
         } catch (e: NodeException) {
             val handlers = graph.nodes.filterIsInstance<ExceptionHandlerNode>()
             if (handlers.isNotEmpty()) {
-                val tmp = NodeParam.output<NodeException>("tmp")
+                val tmp = NodeParam.output<NodeException>("tmp", Uuid.random().toString())
                 executionContext.set(tmp, e)
                 for (handler in handlers) {
                     executionContext.transfer(tmp.id, handler.getInputs().first().id)

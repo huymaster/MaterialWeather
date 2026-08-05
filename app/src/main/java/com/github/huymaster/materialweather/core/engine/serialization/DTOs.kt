@@ -12,9 +12,8 @@ data class ParamMappingDto(
 data class NodeDto(
     val id: String,
     val type: String,
-    val inputs: List<ParamMappingDto> = emptyList(),
-    val outputs: List<ParamMappingDto> = emptyList(),
-    val customData: Map<String, String> = emptyMap()
+    val params: List<ParamMappingDto> = emptyList(),
+    val data: Map<String, String> = emptyMap()
 )
 
 @Serializable

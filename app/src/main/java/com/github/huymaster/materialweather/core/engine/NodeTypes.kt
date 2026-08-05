@@ -13,13 +13,13 @@ sealed class NodeParam<T : Any>(
         type: KClass<T>,
         val defaultValue: T? = null,
         val isOptional: Boolean = defaultValue != null,
-        id: String = Uuid.random().toString()
+        id: String
     ) : NodeParam<T>(id = id, name = name, type = type)
 
     class Output<T : Any>(
         name: String,
         type: KClass<T>,
-        id: String = Uuid.random().toString()
+        id: String
     ) : NodeParam<T>(id = id, name = name, type = type)
 
     companion object {
