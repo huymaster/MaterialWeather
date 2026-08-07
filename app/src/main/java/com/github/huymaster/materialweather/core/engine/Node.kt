@@ -6,7 +6,8 @@ import com.github.huymaster.materialweather.core.engine.serialization.RestoreDat
 import kotlin.uuid.Uuid
 
 abstract class Node(protected val data: RestoreData = RestoreData.EMPTY) {
-    val id: String = Uuid.random().toString()
+    var id: String = Uuid.random().toString()
+        private set
 
     @get:StringRes
     abstract val name: Int
@@ -18,7 +19,17 @@ abstract class Node(protected val data: RestoreData = RestoreData.EMPTY) {
     protected fun skip(): Nothing = throw NodeException.FlowSkipped(id)
 
     abstract suspend fun execute(context: NodeExecutionEngine.ExecutionContext)
+
+    fun changeId(id: String) {
+        this.id = id
+    }
+
     open fun serialize(data: NodeBundle) {
         // Nothing to do by default
+    }
+
+    override fun toString(): String {
+        val type = javaClass.kotlin.simpleName ?: javaClass.simpleName
+        return "Node[$type](id='$id', name=${name})"
     }
 }

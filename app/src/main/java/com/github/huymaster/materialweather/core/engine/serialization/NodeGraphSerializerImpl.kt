@@ -5,7 +5,14 @@ import com.github.huymaster.materialweather.core.engine.NodeGraph
 import com.github.huymaster.materialweather.core.engine.NodeParam
 import kotlinx.serialization.json.Json
 
-class NodeGraphSerializer(json: Json = Json.Default) {
+interface NodeGraphSerializer {
+    fun serialize(graph: NodeGraph): String
+    fun deserialize(jsonString: String): NodeGraph
+
+    companion object : NodeGraphSerializer by NodeGraphSerializerImpl()
+}
+
+private class NodeGraphSerializerImpl(json: Json = Json.Default) : NodeGraphSerializer {
     private val JSON = Json(json) { ignoreUnknownKeys = true }
     private val registry: NodeRegistry = NodeRegistry
 
@@ -26,7 +33,7 @@ class NodeGraphSerializer(json: Json = Json.Default) {
         return NodeGraphDto(nodes = nodeDtos, connections = connectionDtos)
     }
 
-    fun serialize(graph: NodeGraph): String {
+    override fun serialize(graph: NodeGraph): String {
         val dto = toDto(graph)
         return JSON.encodeToString(dto)
     }
@@ -55,7 +62,7 @@ class NodeGraphSerializer(json: Json = Json.Default) {
         return graph
     }
 
-    fun deserialize(jsonString: String): NodeGraph {
+    override fun deserialize(jsonString: String): NodeGraph {
         val dto = JSON.decodeFromString<NodeGraphDto>(jsonString)
         return fromDto(dto)
     }

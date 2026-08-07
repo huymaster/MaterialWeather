@@ -28,7 +28,9 @@ object NodeRegistry {
             dto.params.forEach { put(it.name, it.id) }
         }
         val restoreData = RestoreData(paramIdMap, NodeBundle.fromMap(dto.data))
-        return factory.create(restoreData)
+        val node = factory.create(restoreData)
+        node.changeId(dto.id)
+        return node
     }
 
     private fun getKeys(factory: NodeFactory<*>): Set<String> {
