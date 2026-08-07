@@ -1,5 +1,9 @@
 package com.github.huymaster.materialweather.core.engine
 
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.SaverScope
+import com.github.huymaster.materialweather.core.engine.serialization.NodeGraphDto
+
 class NodeGraph(
     private val sorter: NodeSorter = NodeSorter()
 ) {
@@ -68,4 +72,15 @@ class NodeGraph(
     fun getExecutionLayers(): List<List<Node>> {
         return sorter.sortInLayers(_nodes.values, _connections)
     }
+}
+
+object NodeGraphSaver : Saver<NodeGraph, NodeGraphDto> {
+    override fun SaverScope.save(value: NodeGraph): NodeGraphDto {
+        return NodeGraphDto.fromNodeGraph(value)
+    }
+
+    override fun restore(value: NodeGraphDto): NodeGraph {
+        return value.toNodeGraph()
+    }
+
 }

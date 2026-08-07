@@ -21,7 +21,7 @@ class ExceptionHandlerNode(data: RestoreData = RestoreData.EMPTY) : Node() {
     val message: SharedFlow<String> get() = _message.asSharedFlow()
 
     override fun getInputs(): Set<NodeParam.Input<*>> = setOf(exception)
-    override fun getOutputs(): Set<NodeParam.Output<*>> = setOf()
+    override fun getOutputs(): Set<NodeParam.Output<*>> = setOf(NodeParam.output<String>("Message"))
 
     override suspend fun execute(context: NodeExecutionEngine.ExecutionContext) {
         val exception = context.get<NodeException>(this.exception) ?: skip()
@@ -65,6 +65,7 @@ class ExceptionHandlerNode(data: RestoreData = RestoreData.EMPTY) : Node() {
                 res.getString(R.string.exception_null_param, exception.paramId)
         }
         _message.emit(message)
+        skip()
     }
 
     companion object {
