@@ -6,24 +6,29 @@ import com.github.huymaster.materialweather.core.engine.NodeExecutionEngine
 import com.github.huymaster.materialweather.core.engine.NodeParam
 import com.github.huymaster.materialweather.core.engine.serialization.NodeBundle
 import com.github.huymaster.materialweather.core.engine.serialization.RestoreData
-import kotlinx.serialization.Serializable
 
 @Suppress("UNCHECKED_CAST")
 class ConstantNode(data: RestoreData = RestoreData.EMPTY) : Node(data) {
+    constructor(value: Number) : this() {
+        setValue(value)
+    }
+
     override val name: Int = R.string.node_constant
-    private var value: @Serializable Any = ""
-    private var outputParam: NodeParam.Output<*> =
-        NodeParam.Output("value", value::class, data.getParamId("value"))
+    private var outputParam: NodeParam.Output<Number> =
+        NodeParam.output("value", data.getParamId("value"))
+
+    var value: Number = 0
+        private set
+
+    init {
+        restore(data)
+    }
 
     override fun getInputs(): Set<NodeParam.Input<*>> = emptySet()
     override fun getOutputs(): Set<NodeParam.Output<*>> = setOf(outputParam)
 
-    init {
-        restoreValue()
-    }
-
     override suspend fun execute(context: NodeExecutionEngine.ExecutionContext) {
-        context.set(outputParam as NodeParam.Output<Any>, value)
+        context.set(outputParam, value)
     }
 
     override fun serialize(data: NodeBundle) {
@@ -32,22 +37,15 @@ class ConstantNode(data: RestoreData = RestoreData.EMPTY) : Node(data) {
         data.put(VALUE_KEY, value)
     }
 
-    fun setValue(value: @Serializable Any) {
+    fun setValue(value: Number) {
         this.value = value
-        updateParam()
     }
 
-    private fun updateParam() {
-        val id = outputParam.id
-        outputParam = NodeParam.Output("value", value::class, id)
-    }
-
-    private fun restoreValue() {
+    private fun restore(data: RestoreData) {
         val type = data.getString(TYPE_KEY) ?: return
         val valueClass = Class.forName(type)
         val value = data.get(VALUE_KEY, valueClass.kotlin) ?: return
-        this.value = value
-        updateParam()
+        if (value is Number) this.value = value
     }
 
     private companion object {

@@ -2,6 +2,8 @@ package com.github.huymaster.materialweather.core.engine.serialization
 
 import com.github.huymaster.materialweather.core.engine.Node
 import com.github.huymaster.materialweather.core.engine.NodeException
+import com.github.huymaster.materialweather.core.engine.node.ConstantNode
+import com.github.huymaster.materialweather.core.engine.node.ExceptionHandlerNode
 
 object NodeRegistry {
     private val registry = mutableMapOf<String, NodeFactory<*>>()
@@ -44,5 +46,10 @@ object NodeRegistry {
         if (keys.all { registry.keys.contains(it) })
             throw NodeException.NodeFactoryRegisteredTwice(keys)
         return null
+    }
+
+    init {
+        register(::ConstantNode)
+        register(::ExceptionHandlerNode)
     }
 }
