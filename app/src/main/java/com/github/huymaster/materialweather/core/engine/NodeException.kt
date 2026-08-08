@@ -16,4 +16,5 @@ sealed class NodeException(
     class NodeFactoryNotFound(val type: String) : NodeException()
     class CannotSerializeNode(val nodeId: String) : NodeException()
     class CannotDeserialize(val msg: String) : NodeException()
+    class CannotGetLocation : NodeException()
 }

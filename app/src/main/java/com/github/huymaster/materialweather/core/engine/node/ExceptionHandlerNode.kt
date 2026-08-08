@@ -63,6 +63,9 @@ class ExceptionHandlerNode(data: RestoreData = RestoreData.EMPTY) : Node() {
 
             is NodeException.ParamNotFound ->
                 res.getString(R.string.exception_null_param, exception.paramId)
+
+            is NodeException.CannotGetLocation ->
+                res.getString(R.string.exception_cannot_get_location)
         }
         _message.emit(message)
         skip()

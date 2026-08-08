@@ -14,8 +14,10 @@
     <string name="exception.node.factory.not.found">Node factory %s not found</string>
     <string name="exception.cannot.serialize.node">Cannot serialize node %s</string>
     <string name="exception.cannot.deserialize">Cannot deserialize: %s</string>
+    <string name="exception.cannot.get.location">Cannot get location</string>
 
     <string name="node.constant">Constant</string>
+    <string name="node.location.fetch">Location fetcher</string>
     <string name="node.exception.handler">Exception handler</string>
 
     <string name="theme.dynamic.system">System</string>
