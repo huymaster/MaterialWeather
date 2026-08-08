@@ -1,5 +1,6 @@
 package com.github.huymaster.materialweather.di
 
+import com.github.huymaster.materialweather.core.engine.serialization.NodeGraphSerializer
 import com.github.huymaster.materialweather.feature.entry.di.EntryKoinProvider
 import com.github.huymaster.materialweather.feature.permission.di.PermissionKoinProvider
 import com.github.huymaster.materialweather.feature.settings.di.SettingsKoinProvider
@@ -17,6 +18,7 @@ object ApplicationKoinProvider : KoinProvider {
                 isLenient = true
             }
         }
+        single<NodeGraphSerializer> { NodeGraphSerializer }
     }
 
     private val submodules = listOf(

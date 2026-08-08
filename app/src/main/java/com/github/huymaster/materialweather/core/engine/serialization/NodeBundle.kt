@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import kotlin.reflect.KClass
 import kotlin.uuid.Uuid
 
 @Serializable
@@ -51,11 +52,17 @@ data class RestoreData(
 ) {
     fun getParamId(id: String): String = paramIdMap[id] ?: Uuid.random().toString()
 
-    @OptIn(InternalSerializationApi::class)
     inline fun <reified T : Any> get(key: String): T? {
-        val deserializer = T::class.serializer()
+        return get(key, T::class)
+    }
+
+    @OptIn(InternalSerializationApi::class)
+    fun <T : Any> get(key: String, clazz: KClass<T>): T? {
+        val deserializer = clazz.serializer()
         return data.get(key, deserializer)
     }
+
+    fun getString(key: String): String? = data.getString(key)
 
     companion object {
         val EMPTY = RestoreData(emptyMap(), NodeBundle.EMPTY)

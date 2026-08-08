@@ -17,12 +17,13 @@ class NodeGraph(
     val connections: Set<ParamConnection> get() = _connections.toSet()
 
     fun addNode(node: Node) {
+        node.getInputs().forEach(::addParam)
+        node.getOutputs().forEach(::addParam)
         _nodes[node.id] = node
+    }
 
-        val inputs = node.getInputs()
-        val outputs = node.getOutputs()
-        inputs.forEach { paramMap[it.id] = it }
-        outputs.forEach { paramMap[it.id] = it }
+    private fun addParam(param: NodeParam<*>) {
+        paramMap[param.id] = param
     }
 
     fun removeNode(nodeId: String) {

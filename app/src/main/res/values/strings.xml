@@ -15,6 +15,7 @@
     <string name="exception.cannot.serialize.node">Cannot serialize node %s</string>
     <string name="exception.cannot.deserialize">Cannot deserialize: %s</string>
 
+    <string name="node.constant">Constant</string>
     <string name="node.exception.handler">Exception handler</string>
 
     <string name="theme.dynamic.system">System</string>
