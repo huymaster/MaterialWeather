@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
-class ExceptionHandlerNode(data: RestoreData = RestoreData.EMPTY) : Node() {
+class ExceptionHandlerNode(data: RestoreData = RestoreData.EMPTY) : Node(data) {
     override val name: Int = R.string.node_exception_handler
 
     private val exception =

@@ -50,7 +50,7 @@ data class RestoreData(
     val paramIdMap: Map<String, String>,
     val data: NodeBundle
 ) {
-    fun getParamId(id: String): String = paramIdMap[id] ?: Uuid.random().toString()
+    fun getParamId(name: String): String = paramIdMap[name] ?: Uuid.random().toString()
 
     inline fun <reified T : Any> get(key: String): T? {
         return get(key, T::class)

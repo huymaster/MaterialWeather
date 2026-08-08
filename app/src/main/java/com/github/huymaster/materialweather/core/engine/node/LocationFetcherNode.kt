@@ -12,10 +12,11 @@ import com.github.huymaster.materialweather.core.engine.Node
 import com.github.huymaster.materialweather.core.engine.NodeException
 import com.github.huymaster.materialweather.core.engine.NodeExecutionEngine
 import com.github.huymaster.materialweather.core.engine.NodeParam
+import com.github.huymaster.materialweather.core.engine.serialization.RestoreData
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-class LocationFetcherNode : Node() {
+class LocationFetcherNode(data: RestoreData = RestoreData.EMPTY) : Node(data) {
     override val name: Int = R.string.node_location_fetch
 
     private val latitude =

@@ -5,7 +5,7 @@ import com.github.huymaster.materialweather.core.engine.serialization.NodeBundle
 import com.github.huymaster.materialweather.core.engine.serialization.RestoreData
 import kotlin.uuid.Uuid
 
-abstract class Node(protected val data: RestoreData = RestoreData.EMPTY) {
+abstract class Node(protected val data: RestoreData) {
     var id: String = Uuid.random().toString()
         private set
 
