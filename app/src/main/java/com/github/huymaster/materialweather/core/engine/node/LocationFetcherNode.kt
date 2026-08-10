@@ -1,10 +1,11 @@
 package com.github.huymaster.materialweather.core.engine.node
 
-import android.annotation.SuppressLint
+import android.Manifest
 import android.content.Context
 import android.location.Location
 import android.location.LocationManager
 import android.os.CancellationSignal
+import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat
 import com.github.huymaster.materialweather.R
@@ -14,6 +15,7 @@ import com.github.huymaster.materialweather.core.engine.NodeExecutionEngine
 import com.github.huymaster.materialweather.core.engine.NodeParam
 import com.github.huymaster.materialweather.core.engine.serialization.RestoreData
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.cancellation.CancellationException
 import kotlin.coroutines.resume
 
 class LocationFetcherNode(data: RestoreData = RestoreData.EMPTY) : Node(data) {
@@ -27,29 +29,43 @@ class LocationFetcherNode(data: RestoreData = RestoreData.EMPTY) : Node(data) {
     override fun getInputs(): Set<NodeParam.Input<*>> = emptySet()
     override fun getOutputs(): Set<NodeParam.Output<*>> = setOf(latitude, longitude)
 
-    @SuppressLint("MissingPermission")
     override suspend fun execute(context: NodeExecutionEngine.ExecutionContext) {
+        val coarse = ContextCompat.checkSelfPermission(
+            context.androidContext,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+        val fine = ContextCompat.checkSelfPermission(
+            context.androidContext,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+
+        if (coarse != 0 && fine != 0)
+            throw NodeException.CannotGetLocation(R.string.exception_cannot_get_location_no_permission)
         runCatching {
-            fetchCurrentLocation(context.androidContext) ?: throw NodeException.CannotGetLocation()
+            fetchCurrentLocation(context.androidContext)
         }.onSuccess { location ->
             context.set(latitude, location.latitude)
             context.set(longitude, location.longitude)
         }.onFailure {
-            throw NodeException.CannotGetLocation()
+            if (it is NodeException.CannotGetLocation)
+                throw it
+            if (it is CancellationException) return@onFailure
+            throw it
         }
     }
 
-    @SuppressLint("MissingPermission")
+    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     private suspend fun fetchCurrentLocation(
         context: Context
-    ): Location? {
+    ): Location {
         val service: LocationManager =
             context.getSystemService(LocationManager::class.java) ?: skip()
 
         val isGpsEnabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER)
         val isNetworkEnabled = service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
-        if (!isGpsEnabled && !isNetworkEnabled) return null
+        if (!isGpsEnabled && !isNetworkEnabled)
+            throw NodeException.CannotGetLocation(R.string.exception_cannot_get_location_service_disabled)
 
         val lastKnownLocation = service.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             ?: service.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)

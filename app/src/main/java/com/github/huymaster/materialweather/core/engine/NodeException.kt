@@ -1,5 +1,6 @@
 package com.github.huymaster.materialweather.core.engine
 
+import androidx.annotation.StringRes
 import kotlin.reflect.KClass
 
 sealed class NodeException(
@@ -15,6 +16,6 @@ sealed class NodeException(
     class NodeFactoryRegisteredTwice(val types: Set<String>) : NodeException()
     class NodeFactoryNotFound(val type: String) : NodeException()
     class CannotSerializeNode(val nodeId: String) : NodeException()
-    class CannotDeserialize(val msg: String) : NodeException()
-    class CannotGetLocation : NodeException()
+    class CannotDeserialize(@StringRes val msg: Int) : NodeException()
+    class CannotGetLocation(@StringRes val msg: Int) : NodeException()
 }
