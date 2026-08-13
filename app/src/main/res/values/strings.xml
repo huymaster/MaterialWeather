@@ -14,6 +14,8 @@
     <string name="exception.node.factory.not.found">Node factory %s not found</string>
     <string name="exception.cannot.serialize.node">Cannot serialize node %s</string>
     <string name="exception.cannot.deserialize">Cannot deserialize: %s</string>
+    <string name="exception.cannot.deserialize.no.valid.constructor">No suitable constructor found for %s</string>
+    <string name="exception.cannot.deserialize.create.error">Error while creating instance of %s: %s</string>
     <string name="exception.cannot.get.location">Cannot get location: %s</string>
     <string name="exception.cannot.get.location.service.disabled">Location services are disabled</string>
     <string name="exception.cannot.get.location.no.permission">Missing location permission</string>

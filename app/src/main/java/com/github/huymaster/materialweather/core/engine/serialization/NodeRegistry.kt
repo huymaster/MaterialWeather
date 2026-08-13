@@ -4,6 +4,7 @@ import com.github.huymaster.materialweather.core.engine.Node
 import com.github.huymaster.materialweather.core.engine.NodeException
 import com.github.huymaster.materialweather.core.engine.node.ConstantNode
 import com.github.huymaster.materialweather.core.engine.node.ExceptionHandlerNode
+import com.github.huymaster.materialweather.core.engine.node.LocationFetcherNode
 import kotlin.reflect.KClass
 
 object NodeRegistry {
@@ -68,6 +69,7 @@ object NodeRegistry {
 
     init {
         register(::ConstantNode)
+        register(::LocationFetcherNode)
         register(::ExceptionHandlerNode)
     }
 }

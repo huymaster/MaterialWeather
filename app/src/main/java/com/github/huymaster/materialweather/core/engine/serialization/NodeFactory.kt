@@ -1,5 +1,6 @@
 package com.github.huymaster.materialweather.core.engine.serialization
 
+import com.github.huymaster.materialweather.R
 import com.github.huymaster.materialweather.core.engine.Node
 import com.github.huymaster.materialweather.core.engine.NodeException
 import kotlin.reflect.KClass
@@ -33,7 +34,10 @@ class DefaultFactory<T : Node>(
 
     override fun create(data: RestoreData): T {
         val constructor = targetConstructor
-            ?: throw NodeException.CannotDeserialize("No suitable constructor found for ${type.simpleName}")
+            ?: throw NodeException.CannotDeserialize(
+                R.string.exception_cannot_deserialize_no_valid_constructor,
+                type.simpleName ?: type.java.name
+            )
 
         return runCatching {
             val params = constructor.valueParameters
@@ -42,7 +46,11 @@ class DefaultFactory<T : Node>(
             else
                 constructor.call(data)
         }.getOrElse { cause ->
-            throw NodeException.CannotDeserialize("Failed to instantiate ${type.simpleName}: ${cause.message}")
+            throw NodeException.CannotDeserialize(
+                R.string.exception_cannot_deserialize_create_error,
+                type.simpleName ?: type.java.name,
+                cause.message ?: ""
+            )
         }
     }
 
