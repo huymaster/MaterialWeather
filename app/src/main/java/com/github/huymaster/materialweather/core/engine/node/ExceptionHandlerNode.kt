@@ -28,7 +28,7 @@ class ExceptionHandlerNode(data: RestoreData = RestoreData.EMPTY) : Node(data) {
         val res: Resources = context.androidContext.resources
         val message = when (exception) {
             is NodeException.CannotDeserialize -> {
-                val cause = res.getString(exception.msg)
+                val cause = res.getString(exception.msg, *exception.args)
                 res.getString(R.string.exception_cannot_deserialize, cause)
             }
 
@@ -70,6 +70,9 @@ class ExceptionHandlerNode(data: RestoreData = RestoreData.EMPTY) : Node(data) {
                 val cause = res.getString(exception.msg)
                 res.getString(R.string.exception_cannot_get_location, cause)
             }
+
+            is NodeException.DivideByZero ->
+                res.getString(R.string.exception_divide_by_zero)
         }
         _message.emit(message)
         skip()

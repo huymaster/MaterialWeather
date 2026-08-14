@@ -19,8 +19,10 @@
     <string name="exception.cannot.get.location">Cannot get location: %s</string>
     <string name="exception.cannot.get.location.service.disabled">Location services are disabled</string>
     <string name="exception.cannot.get.location.no.permission">Missing location permission</string>
+    <string name="exception.divide.by.zero">Cannot divide by zero</string>
 
     <string name="node.constant">Constant</string>
+    <string name="node.math">Math</string>
     <string name="node.location.fetch">Location fetcher</string>
     <string name="node.exception.handler">Exception handler</string>
 

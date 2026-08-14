@@ -15,7 +15,7 @@ class ConstantNode(data: RestoreData = RestoreData.EMPTY) : Node(data) {
 
     override val name: Int = R.string.node_constant
     private var outputParam: NodeParam.Output<Number> =
-        NodeParam.output("value", data.getParamId("value"))
+        NodeParam.output(VALUE_KEY, data.getParamId(VALUE_KEY))
 
     var value: Number = 0
         private set

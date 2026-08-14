@@ -16,6 +16,10 @@ sealed class NodeException(
     class NodeFactoryRegisteredTwice(val types: Set<String>) : NodeException()
     class NodeFactoryNotFound(val type: String) : NodeException()
     class CannotSerializeNode(val nodeId: String) : NodeException()
-    class CannotDeserialize(@StringRes val msg: Int, vararg args: Any) : NodeException()
+    class CannotDeserialize(@StringRes val msg: Int, vararg array: Any) : NodeException() {
+        val args: Array<out Any> = array
+    }
+
     class CannotGetLocation(@StringRes val msg: Int) : NodeException()
+    class DivideByZero : NodeException()
 }
